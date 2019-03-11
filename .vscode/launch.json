@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<studentmanagement>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.app.studentmanagement.Application",
+            "projectName": "studentmanagement",
+            "args": ""
+        }
+    ]
+}
