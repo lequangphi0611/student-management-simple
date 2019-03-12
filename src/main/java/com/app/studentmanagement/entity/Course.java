@@ -1,8 +1,8 @@
 package com.app.studentmanagement.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +38,7 @@ public class Course {
         joinColumns = @JoinColumn(name = "student_id"),
         inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    List<Student> students = new ArrayList<>();
+    Set<Student> students = new HashSet<>();
 
     @ManyToMany
     @JoinTable (
@@ -46,7 +46,7 @@ public class Course {
         joinColumns = @JoinColumn(name = "subject_id"),
         inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    List<Subject> subjects = new ArrayList<>();
+    Set<Subject> subjects = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
@@ -94,19 +94,19 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return this.students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
     }
 
-    public List<Subject> getSubjects() {
+    public Set<Subject> getSubjects() {
         return this.subjects;
     }
 
-    public void setSubjects(List<Subject> subjects) {
+    public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
     }
 

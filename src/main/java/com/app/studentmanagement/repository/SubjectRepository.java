@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SubjectRepository extends CrudRepository<Subject, Long> {
 
-    
+    boolean existsByName(String name);
+
 }

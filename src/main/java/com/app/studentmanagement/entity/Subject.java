@@ -1,7 +1,7 @@
 package com.app.studentmanagement.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,17 +17,69 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
-    @Column(
-        columnDefinition = "nvarchar(50)",
-        unique = true,
-        nullable = false
-    )
+
+    @Column(columnDefinition = "nvarchar(50)", unique = true, nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "subject")
-    private List<Scores> allScores = new ArrayList<>();
+    private Set<Scores> allScores = new HashSet<>();
 
     @ManyToMany(mappedBy = "subjects")
-    List<Course> courses = new ArrayList<>();
+    Set<Course> courses = new HashSet<>();
+
+    public Subject() {
+    }
+
+    public Subject(long id, String name, Set<Scores> allScores, Set<Course> courses) {
+        this.id = id;
+        this.name = name;
+        this.allScores = allScores;
+        this.courses = courses;
+    }
+
+    public Subject(String name) {
+        this.name = name;
+    }
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Scores> getAllScores() {
+        return this.allScores;
+    }
+
+    public void setAllScores(Set<Scores> allScores) {
+        this.allScores = allScores;
+    }
+
+    public Set<Course> getCourses() {
+        return this.courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
+    public Subject id(long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Subject name(String name) {
+        this.name = name;
+        return this;
+    }
 }

@@ -1,35 +1,22 @@
-package com.app.studentmanagement.entity;
+package com.app.studentmanagement.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+/**
+ * PersonDTO
+ */
+public class PersonDTO {
 
-@MappedSuperclass
-public class Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    @Column(
-        columnDefinition = "nvarchar(50)",
-        nullable = false
-    )
     private String name;
-
     private boolean gender;
-
     private Date birthday;
-
     private boolean status;
 
-    public Person () {}
+    public PersonDTO() {
+    }
 
-    public Person(long id, String name, boolean gender, Date birthday, boolean status) {
+    public PersonDTO(long id, String name, boolean gender, Date birthday, boolean status) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -37,12 +24,12 @@ public class Person {
         this.status = status;
     }
     
-    public Person (Person person1) {
-    	this.id = person1.getId();
-    	this.name = person1.getName();
-    	this.gender = person1.isGender();
-    	this.birthday = person1.getBirthday();
-    	this.status = person1.isStatus();
+    public PersonDTO (PersonDTO personDTO1) {
+    	this.id = personDTO1.getId();
+    	this.name = personDTO1.getName();
+    	this.gender = personDTO1.isGender();
+    	this.birthday = personDTO1.getBirthday();
+    	this.status = personDTO1.isStatus();
     }
 
     public long getId() {
@@ -81,13 +68,8 @@ public class Person {
         return this.status;
     }
 
-    public boolean getStatus() {
-        return this.status;
-    }
-
     public void setStatus(boolean status) {
         this.status = status;
     }
-
     
 }

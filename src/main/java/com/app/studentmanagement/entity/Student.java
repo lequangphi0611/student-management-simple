@@ -1,8 +1,8 @@
 package com.app.studentmanagement.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -12,10 +12,10 @@ import javax.persistence.OneToMany;
 public class Student extends Person {
 
     @ManyToMany(mappedBy = "students")
-    private List<Course> courses = new ArrayList<>(); 
+    private Set<Course> courses = new HashSet<>(); 
     
     @OneToMany(mappedBy = "student")
-    private List<Scores> allScores = new ArrayList<>();
+    private Set<Scores> allScores = new HashSet<>();
 
     public Student() { super(); }
 
@@ -23,19 +23,19 @@ public class Student extends Person {
         super(id, name, gender, birthday, status);
     }
 
-    public List<Course> getCourses() {
+    public Set<Course> getCourses() {
         return this.courses;
     }
 
-    public void setCourses(List<Course> courses) {
+    public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }
 
-    public List<Scores> getAllScores() {
+    public Set<Scores> getAllScores() {
         return this.allScores;
     }
 
-    public void setAllScores(List<Scores> allScores) {
+    public void setAllScores(Set<Scores> allScores) {
         this.allScores = allScores;
     }
 

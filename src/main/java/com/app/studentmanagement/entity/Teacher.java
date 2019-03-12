@@ -1,8 +1,8 @@
 package com.app.studentmanagement.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ public class Teacher extends Person{
     private String phone;
     
     @OneToMany(mappedBy = "teacher")
-    private List<Course> courses = new ArrayList<>();
+    private Set<Course> courses = new HashSet<>();
 
     public Teacher() { super(); }
 
@@ -34,6 +34,10 @@ public class Teacher extends Person{
         super(id, name, gender, birthday, status);
         this.email = email;
         this.phone = phone;
+    }
+    
+    public Teacher (Person person, String email, String phone) {
+    	
     }
 
     public String getEmail() {
@@ -52,11 +56,11 @@ public class Teacher extends Person{
         this.phone = phone;
     }
 
-    public List<Course> getCourses() {
+    public Set<Course> getCourses() {
         return this.courses;
     }
 
-    public void setCourses(List<Course> courses) {
+    public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }    
 
