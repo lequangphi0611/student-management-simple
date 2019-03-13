@@ -21,6 +21,13 @@ public class TeacherDTO extends PersonDTO {
 		this.phone = phone;
 	}
 
+	public TeacherDTO(String name, boolean gender, Date birthday, 
+			String email, String phone, boolean status) {
+		super(name, gender, birthday, status);
+		this.email = email;
+		this.phone = phone;
+	}
+
 	public TeacherDTO(PersonDTO personDTO1, String email, String phone) {
 		super(personDTO1);
 		this.email = email;
@@ -41,6 +48,13 @@ public class TeacherDTO extends PersonDTO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return "TeacherDTO [email=" + email + ", phone=" + phone + ", getId()=" + getId() + ", getName()=" + getName()
+				+ ", isGender()=" + isGender() + ", getBirthday()=" + getBirthday() + ", isStatus()=" + isStatus()
+				+ "]";
 	}
 
 }

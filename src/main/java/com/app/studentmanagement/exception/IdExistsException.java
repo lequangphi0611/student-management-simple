@@ -21,7 +21,7 @@ public class IdExistsException extends ObjectExistsException {
 		return new StringBuffer("Error : ")
 				.append(classType.getName())
 				.append(" with id = '")
-				.append(id)
+				.append(ob)
 				.append("' ")
 				.append(existsError ? "is already exists !" : "do not exists!")
 				.toString();

@@ -1,7 +1,7 @@
 package com.app.studentmanagement.service.impl;
 
-import java.util.HashSet;
-import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.app.studentmanagement.dto.SubjectDTO;
 import com.app.studentmanagement.entity.Subject;
@@ -9,10 +9,8 @@ import com.app.studentmanagement.exception.IdExistsException;
 import com.app.studentmanagement.exception.NameExistsException;
 import com.app.studentmanagement.repository.SubjectRepository;
 import com.app.studentmanagement.service.SubjectService;
+import com.app.studentmanagement.util.CollectionSupport;
 import com.app.studentmanagement.util.impl.SubjectMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -22,6 +20,9 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Autowired
     private SubjectMapper subjectMapper;
+    
+    @Autowired
+    private CollectionSupport<Subject, SubjectDTO> collectionSupport;
 
     @Override
     public SubjectDTO insert(SubjectDTO subjectDTO) {
@@ -49,10 +50,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Iterable<SubjectDTO> getAll() {
-        Set<SubjectDTO> subjectDTOs = new HashSet<>();
-        subjectRepository.findAll()
-            .forEach((subject) -> subjectDTOs.add(subjectMapper.parseDTO(subject)));
-        return subjectDTOs;
+        return collectionSupport.convert(subjectRepository.findAll(), subjectMapper::parseDTO);
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -25,7 +26,9 @@ public class Teacher extends Person{
     @Column(nullable = false)
     private String phone;
     
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(
+        mappedBy = "teacher",
+        fetch = FetchType.LAZY)
     private Set<Course> courses = new HashSet<>();
 
     public Teacher() { super(); }
@@ -37,7 +40,9 @@ public class Teacher extends Person{
     }
     
     public Teacher (Person person, String email, String phone) {
-    	
+        super(person);
+        this.email = email;
+        this.phone = phone;
     }
 
     public String getEmail() {

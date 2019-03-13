@@ -5,22 +5,31 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Student extends Person {
 
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany(
+        mappedBy = "students",
+        fetch = FetchType.LAZY)
     private Set<Course> courses = new HashSet<>(); 
     
-    @OneToMany(mappedBy = "student")
+    @OneToMany(
+        mappedBy = "student", 
+        fetch = FetchType.LAZY)
     private Set<Scores> allScores = new HashSet<>();
 
     public Student() { super(); }
 
     public Student(long id, String name, boolean gender, Date birthday, boolean status) {
         super(id, name, gender, birthday, status);
+    }
+
+    public Student (Person person1) {
+        super(person1);
     }
 
     public Set<Course> getCourses() {

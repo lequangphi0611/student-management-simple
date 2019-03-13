@@ -23,6 +23,13 @@ public class PersonDTO {
         this.birthday = birthday;
         this.status = status;
     }
+
+    public PersonDTO(String name, boolean gender, Date birthday, boolean status) {
+        this.name = name;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.status = status;
+    }
     
     public PersonDTO (PersonDTO personDTO1) {
     	this.id = personDTO1.getId();

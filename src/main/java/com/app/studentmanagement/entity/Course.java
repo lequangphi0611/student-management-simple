@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class Course {
     @Temporal(TemporalType.DATE)
     private Date endDate;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable (
         name = "course_student",
         joinColumns = @JoinColumn(name = "student_id"),
@@ -40,7 +41,7 @@ public class Course {
     )
     Set<Student> students = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable (
         name = "course_subject",
         joinColumns = @JoinColumn(name = "subject_id"),
@@ -48,7 +49,7 @@ public class Course {
     )
     Set<Subject> subjects = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 

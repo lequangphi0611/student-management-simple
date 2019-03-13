@@ -9,8 +9,8 @@ public class NameExistsException extends ObjectExistsException {
 		super(message);
 	}
 	
-	public NameExistsException(Class classType, Object id, boolean existsError) {
-		super(classType, id, existsError);
+	public NameExistsException(Class classType, Object name, boolean existsError) {
+		super(classType, name, existsError);
 	}
 
 	@Override
@@ -18,7 +18,7 @@ public class NameExistsException extends ObjectExistsException {
 		return new StringBuffer("Error : ")
 				.append(classType.getName())
 				.append(" with name = '")
-				.append(id)
+				.append(ob)
 				.append("' ")
 				.append(existsError ? "is already exists !" : "do not exists!")
 				.toString();
