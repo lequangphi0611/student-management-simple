@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+    <div class="container col-md-6 mt-md-4 mt-sm-2">
+
+        <!-- form -->
+        <form th:action="${action}" method="post" class="form-inline" th:object="${subject}">
+            <div class="form-group mr-md-3 mr-sm-1">
+                <label for="name">Tên Môn Học : </label>
+                <input type="text" th:field="*{name}" class="form-control ml-2">
+            </div>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <a th:if="${subject.name != null}" name="" id="" class="btn btn-light ml-sm-2 ml-md-4" th:href="@{/subject}" role="button">&times; Thoát</a>
+        </form>
+        <!-- Table -->
+        <div class="card  mt-sm-2 mt-md-4">
+            <div class="card-header">
+                Danh sách môn học
+            </div>
+            <table class="table table-bordered mb-0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Môn học</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="subject,i : ${allSubjects}">
+                        <tr>
+                            <td scope="row" th:text="${i.index + 1}"></td>
+                            <td th:text="${subject.name}"></td>
+                            <td>
+                                <a th:href="@{/subject/edit/{id}(id=${subject.id})}" role="button" class="btn btn-warning">Chỉnh sửa</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/subject/delete?id=} + ${subject.id}" role="button" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+
+        <th:block th:replace="layout/layout :: scripts"></th:block>
+</body>
+
+</html>

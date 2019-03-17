@@ -1,9 +1,10 @@
 package com.app.studentmanagement.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -39,15 +41,11 @@ public class Course {
         joinColumns = @JoinColumn(name = "student_id"),
         inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    Set<Student> students = new HashSet<>();
+    List<Student> students = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable (
-        name = "course_subject",
-        joinColumns = @JoinColumn(name = "subject_id"),
-        inverseJoinColumns = @JoinColumn(name = "course_id")
-    )
-    Set<Subject> subjects = new HashSet<>();
+    @OneToMany(mappedBy = "course", 
+    		cascade = CascadeType.ALL)
+    List<CourseSubject> courseSubjects = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
@@ -95,20 +93,20 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public Set<Student> getStudents() {
+    public List<Student> getStudents() {
         return this.students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-    public Set<Subject> getSubjects() {
-        return this.subjects;
+    public List<CourseSubject> getCourseSubjects() {
+        return this.courseSubjects;
     }
 
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
+    public void setCourseSubjects(List<CourseSubject> courseSubjects) {
+        this.courseSubjects = courseSubjects;
     }
 
     public Teacher getTeacher() {

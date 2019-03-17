@@ -3,6 +3,7 @@ package com.app.studentmanagement.service.impl;
 import com.app.studentmanagement.dto.TeacherDTO;
 import com.app.studentmanagement.entity.Teacher;
 import com.app.studentmanagement.exception.EmailExistsException;
+import com.app.studentmanagement.exception.IdExistsException;
 import com.app.studentmanagement.exception.PhoneExistsException;
 import com.app.studentmanagement.repository.TeacherRepository;
 import com.app.studentmanagement.service.TeacherService;
@@ -34,16 +35,43 @@ public class TeacherServiceImpl implements TeacherService {
 		if(teacherRepository.existsByEmail(newTeacherDTO.getEmail())) {
 			throw new EmailExistsException(newTeacherDTO.getEmail());
 		}
+		
 		if(teacherRepository.existsByPhone(newTeacherDTO.getPhone())) {
 			throw new PhoneExistsException(newTeacherDTO.getPhone());
 		}
+		
 		teacherRepository.save(teacherMapper.parseEntity(newTeacherDTO));
 		return newTeacherDTO;
 	}
 
 	@Override
 	public TeacherDTO update(TeacherDTO newTeacherDTO) {
-		return null;
+		if(!teacherRepository.existsById(newTeacherDTO.getId())) {
+			throw new IdExistsException(Teacher.class, newTeacherDTO.getId(), false);
+		}
+		
+		Teacher oldTeacher = null;
+		if (teacherRepository.existsByEmail(newTeacherDTO.getEmail())) {
+			oldTeacher = teacherRepository.findById(newTeacherDTO.getId()).get();
+			if(!oldTeacher.getEmail().equals(newTeacherDTO.getEmail())) {
+				throw new EmailExistsException(oldTeacher.getEmail());
+			}
+		}
+		
+		if(teacherRepository.existsByPhone(newTeacherDTO.getPhone())) {
+			oldTeacher = teacherRepository.findById(newTeacherDTO.getId()).get();
+			if(!oldTeacher.getPhone().equals(newTeacherDTO.getPhone())) {
+				throw new PhoneExistsException(newTeacherDTO.getPhone());
+			}
+		}
+		
+		teacherRepository.save(teacherMapper.parseEntity(newTeacherDTO));
+		return newTeacherDTO;
+	}
+
+	@Override
+	public TeacherDTO getByID(long id) {
+		return teacherMapper.parseDTO(teacherRepository.findById(id).get());
 	}
 
 }

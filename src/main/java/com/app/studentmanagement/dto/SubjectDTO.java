@@ -3,7 +3,7 @@ package com.app.studentmanagement.dto;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SubjectDTO {
+public class SubjectDTO implements Comparable<SubjectDTO>{
 
     private long id;
     private String name;
@@ -55,8 +55,15 @@ public class SubjectDTO {
     }
 
     @Override
-    public String toString() {
-        return this.name;
+	public String toString() {
+		return "SubjectDTO [id=" + id + ", name=" + name + ", allScores=" + allScores + ", courses=" + courses + "]";
+	}
+
+    @Override
+    public int compareTo(SubjectDTO o) {
+        return this.name.compareTo(o.getName());
     }
+    
+    
 
 }

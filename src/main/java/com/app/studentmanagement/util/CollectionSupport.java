@@ -1,7 +1,7 @@
 package com.app.studentmanagement.util;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -17,8 +17,8 @@ public class CollectionSupport<E, D> {
         D parseDTOTo(E e);
     }
 
-    public Iterable<D> convert(Iterable<E> entitys, Parser<E, D> parser) {
-        Set<D> dtos = new HashSet<>();
+    public List<D> convert(Iterable<E> entitys, Parser<E, D> parser) {
+        List<D> dtos = new ArrayList<>();
         entitys
             .forEach(entity -> dtos.add(parser.parseDTOTo(entity)));
         return dtos;

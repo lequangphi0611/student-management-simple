@@ -12,5 +12,6 @@ public interface TeacherService {
 	TeacherDTO insert(TeacherDTO newTeacherDTO);
 	
 	TeacherDTO update(TeacherDTO newTeacherDTO);
-    
+	
+	TeacherDTO getByID(long id);
 }

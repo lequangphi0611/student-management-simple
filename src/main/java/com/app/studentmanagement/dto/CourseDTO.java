@@ -1,8 +1,10 @@
 package com.app.studentmanagement.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * CourseDTO
@@ -11,11 +13,17 @@ public class CourseDTO {
 
     private long id;
     private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date beginDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     private TeacherDTO teacher;
-    private Set<SubjectDTO> subjectDTOs = new HashSet<>();
-    private Set<StudentDTO> studentDTOs = new HashSet<>();
+    private List<SubjectDTO> subjectDTOs = new ArrayList<>();
+    private List<StudentDTO> studentDTOs = new ArrayList<>();
+
+    {
+        beginDate = endDate = new Date();
+    }
 
     public CourseDTO() {
     }
@@ -68,19 +76,19 @@ public class CourseDTO {
         this.teacher = teacher;
     }
 
-    public Set<SubjectDTO> getSubjectDTOs() {
+    public List<SubjectDTO> getSubjectDTOs() {
         return this.subjectDTOs;
     }
 
-    public void setSubjectDTOs(Set<SubjectDTO> subjectDTOs) {
+    public void setSubjectDTOs(List<SubjectDTO> subjectDTOs) {
         this.subjectDTOs = subjectDTOs;
     }
 
-    public Set<StudentDTO> getStudentDTOs() {
+    public List<StudentDTO> getStudentDTOs() {
         return this.studentDTOs;
     }
 
-    public void setStudentDTOs(Set<StudentDTO> studentDTOs) {
+    public void setStudentDTOs(List<StudentDTO> studentDTOs) {
         this.studentDTOs = studentDTOs;
     }
 
