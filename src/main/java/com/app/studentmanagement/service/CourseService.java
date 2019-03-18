@@ -13,6 +13,6 @@ public interface CourseService {
 
     boolean deleteByID(Long id);
 
-    Iterable<CourseDTO> getAll();
+    Iterable<CourseDTO> getAllAndFetchSubjects();
     
 }

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import com.app.studentmanagement.dto.CourseDTO;
 import com.app.studentmanagement.entity.Course;
-import com.app.studentmanagement.entity.CourseSubject;
 import com.app.studentmanagement.util.Mapper;
 
 @Component
@@ -16,8 +15,23 @@ public class CourseMapper implements Mapper<Course, CourseDTO> {
 	
 	@Override
 	public CourseDTO parseDTO(Course entity) {
-		// TODO Auto-generated method stub
-		return null;
+		CourseDTO courseDTO = new CourseDTO();
+		courseDTO.setId(entity.getId());
+		courseDTO.setName(entity.getName());
+		courseDTO.setTeacher(teacherMapper.parseDTO(entity.getTeacher()));
+		courseDTO.setBeginDate(entity.getBeginDate());
+		courseDTO.setEndDate(entity.getEndDate());
+		return courseDTO;
+	}
+
+	public CourseDTO parseDTOAndFetchSubjects(Course entity) {
+		CourseDTO courseDTO = parseDTO(entity);
+		entity.getCourseSubjects().forEach(
+			(courseSubjectItem) -> {
+				courseDTO.getSubjectDTOs().add(subjectMapper.parseDTO(courseSubjectItem.getSubject()));
+			}
+		);
+		return courseDTO;
 	}
 
 	@Override

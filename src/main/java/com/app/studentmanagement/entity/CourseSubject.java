@@ -27,6 +27,10 @@ public class CourseSubject {
 		super();
 	}
 
+	public CourseSubject(CourseSubjectID id) {
+		this.id = id;
+	}
+
 	public CourseSubject( Course course, Subject subject) {
 		super();
 		this.id = new CourseSubjectID(course.getId(), subject.getId());
